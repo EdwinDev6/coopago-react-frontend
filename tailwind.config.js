@@ -9,6 +9,8 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [flowbite.plugin(),],
+  plugins: [
+    flowbite.plugin(),
+  "./node_modules/flowbite/**/*.js",],
 }
 
