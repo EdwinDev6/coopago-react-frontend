@@ -22,7 +22,7 @@ export default function Navbar() {
   };
 
   const toggleDropdown = () => {
-    setDropdownOpen(prevState => {
+    setDropdownOpen((prevState) => {
       const newState = !prevState;
       localStorage.setItem("isDropdownOpen", newState); // Guardar el nuevo estado en localStorage
       return newState;
@@ -33,7 +33,7 @@ export default function Navbar() {
   if (excludedRoutes.includes(location.pathname)) {
     return null;
   }
-  
+
   return (
     <div>
       <nav className="bg-white  border-b-2 border-gray-200 dark:bg-gray-900">
