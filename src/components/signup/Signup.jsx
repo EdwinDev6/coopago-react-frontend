@@ -1,6 +1,13 @@
 import backgroundImage from "../../assets/images/backgroundImage.jpg";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    navigate("/");
+  };
+
   return (
     <section
       className="bg-no-repeat bg-cover bg-center min-h-screen flex flex-col items-center justify-center bg-green-40"
@@ -50,13 +57,31 @@ function Signup() {
               required
             />
           </div>
-          <div className="flex items-start mb-5"></div>
-          <button
-            type="submit"
-            className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-          >
-            Registrar
-          </button>
+
+          <div className="flex items-center space-x-4 ml-12">
+            <button
+              type="submit"
+              onClick={handleRedirect}
+              className="text-white bg-red-400 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:red-green-800 items-center content-center flex"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 items-center content-center flex"
+            >
+              Registrar
+            </button>
+          </div>
+          <p className="mt-0  text-sm text-gray-500 text-center">
+            Ya Tienes Cuenta?{" "}
+            <a
+              href="/"
+              className="font-semibold leading-6 text-green-600 hover:text-green-500"
+            >
+              Inicia sesion
+            </a>
+          </p>
         </form>
       </div>
     </section>

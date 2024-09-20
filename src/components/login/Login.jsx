@@ -1,7 +1,13 @@
+import backgroundImage from "../../assets/images/backgroundImage.jpg";
+
 export default function Login() {
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+       <section
+      className="bg-no-repeat bg-cover bg-center min-h-screen flex flex-col items-center justify-center bg-green-40"
+      style={{ backgroundImage: `url('${backgroundImage}')` }}
+    >
+      <div className="max-w-sm p-10 bg-white border border-gray-200 rounded-lg shadow">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt="Daite"
@@ -44,7 +50,7 @@ export default function Login() {
                 >
                   Contraseña
                 </label>
-                <div className="text-sm">
+                <div className="text-sm mx-2">
                   <a
                     href="#"
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
@@ -86,7 +92,8 @@ export default function Login() {
             </a>
           </p>
         </div>
-      </div>
+        </div>
+      </section>
     </>
   );
 }
