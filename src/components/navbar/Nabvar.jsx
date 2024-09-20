@@ -1,33 +1,35 @@
 import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Navbar() {
   const location = useLocation();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   // Estas son las rutas donde no se reflejará el menú
   const excludedRoutes = ["/", "/signup"];
-
-  // Cargar el estado del dropdown desde localStorage
-  useEffect(() => {
-    const savedDropdownState = localStorage.getItem("isDropdownOpen");
-    if (savedDropdownState !== null) {
-      setDropdownOpen(JSON.parse(savedDropdownState));
-    }
-  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
 
   const toggleDropdown = () => {
-    setDropdownOpen((prevState) => {
-      const newState = !prevState;
-      localStorage.setItem("isDropdownOpen", newState); // Guardar el nuevo estado en localStorage
-      return newState;
-    });
+    setDropdownOpen((prevState) => !prevState);
   };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Condicional para no renderizar el componente
   if (excludedRoutes.includes(location.pathname)) {
@@ -36,17 +38,10 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav className="bg-white  border-b-2 border-gray-200 dark:bg-gray-900">
+      <nav className="bg-white border-b-2 border-gray-200 dark:bg-gray-900">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
-          <a
-            href="/home"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-            <img
-              src="../../src/assets/images/logotipo.png"
-              className="h-8"
-              alt="Daite Logo"
-            />
+          <a href="/home" className="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="../../src/assets/images/logotipo.png" className="h-8" alt="Daite Logo" />
           </a>
           <div className="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">
             <button
@@ -57,32 +52,17 @@ export default function Navbar() {
               aria-expanded={isMenuOpen}
             >
               <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-5 h-5"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+              <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d={
-                    isMenuOpen
-                      ? "M6 18L18 6M6 6l12 12"
-                      : "M4 6h16M4 12h16M4 18h16"
-                  }
+                  d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
                 />
               </svg>
             </button>
           </div>
-          <div
-            id="mega-menu-icons"
-            className={`${
-              isMenuOpen ? "block" : "hidden"
-            } items-center justify-between w-full md:flex md:w-auto md:order-1`}
-          >
+          <div id="mega-menu-icons" className={`${isMenuOpen ? "block" : "hidden"} items-center justify-between w-full md:flex md:w-auto md:order-1`}>
             <ul className="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
               <li>
                 <a
@@ -99,26 +79,13 @@ export default function Navbar() {
                   className="flex items-center justify-between w-full py-2 px-3 font-medium text-gray-900 border-b border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Company
-                  <svg
-                    className="w-2.5 h-2.5 ms-3"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 10 6"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m1 1 4 4 4-4"
-                    />
+                  <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                   </svg>
                 </button>
                 <div
-                  className={`absolute z-10 grid w-auto grid-cols-2 text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700 md:grid-cols-3 dark:bg-gray-700 ${
-                    isDropdownOpen ? "block" : "hidden"
-                  }`} // Cambia aquí
+                  ref={dropdownRef}
+                  className={`absolute z-10 grid w-auto grid-cols-2 text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700 md:grid-cols-3 dark:bg-gray-700 ${isDropdownOpen ? "block" : "hidden"}`}
                 >
                   <div className="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
                     <ul

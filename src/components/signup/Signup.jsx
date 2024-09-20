@@ -1,4 +1,3 @@
-import backgroundImage from "../../assets/images/backgroundImage.jpg";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -10,8 +9,8 @@ function Signup() {
 
   return (
     <section
-      className="bg-no-repeat bg-cover bg-center min-h-screen flex flex-col items-center justify-center bg-green-40"
-      style={{ backgroundImage: `url('${backgroundImage}')` }}
+      className="bg-blue-600 bg-center min-h-screen flex flex-col items-center justify-center bg-blue-40"
+      
     >
       <div className="max-w-sm p-10 bg-white border border-gray-200 rounded-lg shadow">
         <img
@@ -30,7 +29,7 @@ function Signup() {
             <input
               type="email"
               id="email"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               placeholder="ejemplo@gmail.com"
               required
             />
@@ -42,8 +41,9 @@ function Signup() {
             <input
               type="password"
               id="password"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               required
+              placeholder="********"
             />
           </div>
           <div className="mb-5">
@@ -53,8 +53,9 @@ function Signup() {
             <input
               type="password"
               id="repeat-password"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               required
+              placeholder="********"
             />
           </div>
 
@@ -62,13 +63,13 @@ function Signup() {
             <button
               type="submit"
               onClick={handleRedirect}
-              className="text-white bg-red-400 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:red-green-800 items-center content-center flex"
+              className="text-white bg-red-400 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:red-blue-800 items-center content-center flex"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 items-center content-center flex"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 items-center content-center flex"
             >
               Registrar
             </button>
@@ -77,7 +78,7 @@ function Signup() {
             Ya Tienes Cuenta?{" "}
             <a
               href="/"
-              className="font-semibold leading-6 text-green-600 hover:text-green-500"
+              className="font-semibold leading-6 text-blue-600 hover:text-blue-500"
             >
               Inicia sesion
             </a>
