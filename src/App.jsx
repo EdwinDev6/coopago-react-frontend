@@ -9,7 +9,7 @@ import NotFoundPage from "./components/notFoundPage/NotFoundPage";
 
 function App() {
   return (
-    <div className="bg-blue-500 min-h-screen">
+    <div className="">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
