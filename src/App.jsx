@@ -5,6 +5,7 @@ import Signup from "./components/signup/Signup";
 import About from "./components/about/About";
 import "./App.css";
 import Layout from "./components/shared/Layout";
+import NotFoundPage from "./components/notFoundPage/NotFoundPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         </Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<NotFoundPage/>} />
       </Routes>
     </div>
   );
