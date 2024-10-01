@@ -3,16 +3,19 @@ import Home from "./components/home/Home";
 import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
 import About from "./components/about/About";
+import "./App.css";
+import Layout from "./components/shared/Layout";
 
 function App() {
   return (
-    <div className="">
+    <div className="bg-blue-500 min-h-screen">
       <Routes>
-        {/* Public routes */}
-        <Route path="/" exact element={<Login />} />
-        <Route path="/signup" exact element={<Signup />} />
-        <Route path="/home" exact element={<Home />} />
-        <Route path="/about" exact element={<About />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" exact element={<About />} />
+        </Route>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );
