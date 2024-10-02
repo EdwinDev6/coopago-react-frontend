@@ -14,7 +14,7 @@ export default function Sidebar() {
     <div className="bg-neutral-900 w-60 p-3 flex flex-col">
       <div className="flex items-center gap-2 px-1 py-3">
         <img src={logotipo} alt="Coopago" className="w-10 h-10" />
-        <span className="text-neutral-200 text-lg">Coopago</span>
+        <span className="text-neutral-200 text-lg">CooPagos</span>
       </div>
       <div className="py-8 flex flex-1 flex-col gap-0.5">
         {DASHBOARD_SIDEBAR_LINKS.map((link) => (
