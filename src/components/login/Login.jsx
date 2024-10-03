@@ -30,7 +30,7 @@ export default function Login() {
       const result = await response.json();
 
       if (!response.ok) {
-        setErrorMessage(result.message || "Error al iniciar sesión");
+        setErrorMessage(result.message || "Usuario o Contraseña incorrectos");
         setSuccessMessage("");
         return;
       }
