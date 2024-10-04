@@ -67,8 +67,8 @@ export default function Login() {
 
   return (
     <section className="bg-blue-800 bg-opacity-100 min-h-screen flex flex-col items-center justify-center bg-blue-40">
-      <div className="max-w-lg p-10 bg-white border border-gray-200 rounded-lg shadow lg:w-[500px]">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+      <article className="max-w-lg p-10 bg-white border border-gray-200 rounded-lg shadow lg:w-[500px]">
+        <header className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt="Daite"
             src="../../src/assets/images/logotipo.png"
@@ -77,7 +77,7 @@ export default function Login() {
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-blue-800">
             Iniciar sesión
           </h2>
-        </div>
+        </header>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -149,17 +149,22 @@ export default function Login() {
             )}
           </form>
 
-          <p className="mt-10 text-right text-sm text-gray-500">
+          <footer className="mt-10 flex justify-between text-sm text-blue-800">
+          <p className="font-bold">2024 © Daite</p>
+          <p>
             Desarrollado Por{" "}
             <a
-              href="https://www.daite.com.do/" target="_blank" rel="noreferrer"
-              className="font-bold leading-6 text-blue-600 hover:text-blue-500"
+              href="https://www.daite.com.do/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-bold text-blue-600 hover:text-blue-500"
             >
               Daite SRL
             </a>
           </p>
+        </footer>
         </div>
-      </div>
+      </article>
     </section>
   );
 }
