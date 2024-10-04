@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
 import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { FaUserCircle } from "react-icons/fa";
+import { MdMenuOpen } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 
-export default function Header() {
+export default function Header({ toggleSidebar, isOpen }) {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
 
@@ -16,13 +18,19 @@ export default function Header() {
   }, []);
 
   return (
-    <div className="bg-white h-16 px-4 flex items-center border-b border-gray-200 justify-between">
-      <div className="relative"></div>
-      <div className="flex items-center mr-2">
-          <span>{username || "Usuario"}</span>
-        <Menu as="div" className="relative">
+    <div className="bg-white h-16 px-4 flex items-center border-b border-gray-200 justify-between overflow-hidden">
+      <button
+        className="text-black text-3xl md:hidden border border-gray-400 rounded-md p-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        onClick={toggleSidebar}
+      >
+        <MdMenuOpen />
+      </button>
+
+      <div className="flex items-center ml-auto flex-shrink-0">
+        <span className="text-base md:text-lg truncate">{username}</span>
+        <Menu as="div" className="relative ml-2">
           <div>
-            <Menu.Button className="ml-1 bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-neutral-400">
+            <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-neutral-400">
               <div className="h-10 w-10 rounded-full flex items-center justify-center">
                 <FaUserCircle className="h-10 w-10 text-gray-300" />
               </div>
@@ -41,7 +49,10 @@ export default function Header() {
               <Menu.Item>
                 {({ active }) => (
                   <div
-                    onClick={() => navigate("/profile")}
+                    onClick={() => {
+                      navigate("/profile");
+                      if (isOpen) toggleSidebar();
+                    }}
                     className={classNames(
                       active && "bg-gray-100",
                       "active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200"
@@ -54,7 +65,10 @@ export default function Header() {
               <Menu.Item>
                 {({ active }) => (
                   <div
-                    onClick={() => navigate("/settings")}
+                    onClick={() => {
+                      navigate("/settings");
+                      if (isOpen) toggleSidebar();
+                    }}
                     className={classNames(
                       active && "bg-gray-100",
                       "active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200"
