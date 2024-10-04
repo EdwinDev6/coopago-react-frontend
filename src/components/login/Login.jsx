@@ -66,7 +66,7 @@ export default function Login() {
   };
 
   return (
-    <section className="bg-blue-600 min-h-screen flex flex-col items-center justify-center bg-blue-40">
+    <section className="bg-blue-800 bg-opacity-100 min-h-screen flex flex-col items-center justify-center bg-blue-40">
       <div className="max-w-lg p-10 bg-white border border-gray-200 rounded-lg shadow lg:w-[500px]">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -74,7 +74,7 @@ export default function Login() {
             src="../../src/assets/images/logotipo.png"
             className="mx-auto h-10 w-auto sm:h-12 md:h-20 lg:h-30"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 sm:">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-blue-800">
             Iniciar sesión
           </h2>
         </div>
