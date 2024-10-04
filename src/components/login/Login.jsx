@@ -149,13 +149,13 @@ export default function Login() {
             )}
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
-            ¿No tienes cuenta?{" "}
+          <p className="mt-10 text-right text-sm text-gray-500">
+            Desarrollado Por{" "}
             <a
-              href="/signup"
-              className="font-semibold leading-6 text-blue-600 hover:text-blue-500"
+              href="https://www.daite.com.do/" target="_blank" rel="noreferrer"
+              className="font-bold leading-6 text-blue-600 hover:text-blue-500"
             >
-              Crea tu cuenta
+              Daite SRL
             </a>
           </p>
         </div>
