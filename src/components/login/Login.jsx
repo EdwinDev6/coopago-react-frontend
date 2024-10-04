@@ -150,19 +150,19 @@ export default function Login() {
           </form>
 
           <footer className="mt-10 flex justify-between text-sm text-blue-800">
-          <p className="font-bold">2024 © Daite</p>
-          <p>
-            Desarrollado Por{" "}
-            <a
-              href="https://www.daite.com.do/"
-              target="_blank"
-              rel="noreferrer"
-              className="font-bold text-blue-600 hover:text-blue-500"
-            >
-              Daite SRL
-            </a>
-          </p>
-        </footer>
+            <p className="font-bold">2024 ©Daite</p>
+            <p className="mx-2">
+              Desarrollado Por{" "}
+              <a
+                href="https://www.daite.com.do/"
+                target="_blank"
+                rel="noreferrer"
+                className="font-bold text-blue-600 hover:text-blue-500"
+              >
+                Daite SRL
+              </a>
+            </p>
+          </footer>
         </div>
       </article>
     </section>
