@@ -21,6 +21,7 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({
           usuario: user,
           contrasena: password,
@@ -37,15 +38,16 @@ export default function Login() {
 
       const userData = result.data;
 
-      // Actualizamos el estado de autenticación con los datos relevantes
       setAuth({
         id: userData.id_usuario,
         user: userData.usuario,
         lastSession: userData.ultima_sesion,
         db: result.database,
+        server: result.database.server,
+        port: result.database.port,
+        options: result.database.options,
       });
 
-      // Guardamos los datos en sessionStorage
       sessionStorage.setItem(
         "auth",
         JSON.stringify({
@@ -53,6 +55,9 @@ export default function Login() {
           user: userData.usuario,
           lastSession: userData.ultima_sesion,
           db: result.database,
+          server: result.database.server,
+          port: result.database.port,
+          options: result.database.options,
         })
       );
 
