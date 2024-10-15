@@ -22,7 +22,10 @@ export default function Sidebar({ isOpen, closeSidebar }) {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(logoutUrl, { method: "POST" });
+      const response = await fetch(logoutUrl, {
+        method: "POST",
+        credentials: "include",
+      });
 
       if (!response.ok) {
         throw new Error("Error al cerrar sesión");
