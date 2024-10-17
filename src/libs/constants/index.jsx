@@ -23,9 +23,9 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     icon: <HiOutlineViewGrid />,
   },
   {
-    key: "products",
-    label: "Products",
-    path: "/products",
+    key: "procedure",
+    label: "Registrar Beneficiarios",
+    path: "/procedure/p_registrar_beneficiarios",
     icon: <HiOutlineCube />,
   },
   {
