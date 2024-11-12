@@ -5,16 +5,15 @@ import { FaUserCircle } from "react-icons/fa";
 import { MdMenuOpen } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
+import useAuth from "../../hooks/useAuth";
 
 export default function Header({ toggleSidebar, isOpen }) {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState()
+  const { auth } = useAuth();
 
   useEffect(() => {
-    const authData = JSON.parse(sessionStorage.getItem("auth"));
-    if (authData && authData.user) {
-      setUsername(authData.user);
-    }
+    setUsername(auth.user.nombre_usuario)
   }, []);
 
   return (
