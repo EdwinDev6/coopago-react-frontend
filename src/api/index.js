@@ -20,7 +20,7 @@ export const authUser = (user) => {
 
 export const logoutUser = () => {
   return new Promise((success, reject) => {
-    Axios.post('logout').then((res) => {
+    Axios.get('logout').then((res) => {
       success(res);
     }
 

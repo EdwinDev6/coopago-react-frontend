@@ -11,7 +11,6 @@ export default function Header({ toggleSidebar, isOpen }) {
   const navigate = useNavigate();
   const [username, setUsername] = useState()
   const { auth } = useAuth();
-
   useEffect(() => {
     setUsername(auth.user.nombre_usuario)
   }, []);

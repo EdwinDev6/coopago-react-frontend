@@ -6,21 +6,19 @@ import About from "./components/about/About";
 import Layout from "./components/shared/Layout";
 import NotFoundPage from "./components/notFoundPage/NotFoundPage";
 import PrivateRoute from "./components/protectedRoute/PrivatedRoute";
-import StoredProcedureView from "./components/dinamic/StoredProcedureView";
 import { AuthProvider } from "./context/AuthProvider";
-import StoredProceduresList from "./components/dinamic/StoredProceduresList";
+import { RegisterBeneficiary } from "./components/Views/RegisterBeneficiary";
 
 function App() {
   return (
     <AuthProvider>
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route element={<Layout />}>
         {/* Rutas accesibles solo si inicias sesión */}
         <Route element={<PrivateRoute />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="procedure/:procedureName" element={<StoredProcedureView />} />
-          <Route path="procedures" element={<StoredProceduresList />} />
+          <Route path="RegistrarBeneficiarios" element={<RegisterBeneficiary/>} />
         </Route>
       </Route>
 

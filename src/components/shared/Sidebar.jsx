@@ -18,25 +18,22 @@ export default function Sidebar({ isOpen, closeSidebar }) {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const sidebarRef = useRef();
-
   const handleLogout = async () => {
     logoutUser().then(() => {
         setAuth({});
         navigate("/login", { replace: true });
       })
-      .catch((res) => {
-        console.log(res)
+      .catch(() => {
         navigate("/login")
       });
   };
-
+  console.log("Sidebar")
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         closeSidebar();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
@@ -56,10 +53,13 @@ export default function Sidebar({ isOpen, closeSidebar }) {
         "md:static md:translate-x-0"
       )}
     >
-      <div className="flex items-center gap-2 px-1 py-3">
-        <img src={logotipo} alt="Coopago" className="w-10 h-10" />
-        <span className="text-neutral-200 text-lg">CooPagos</span>
-      </div>
+      <Link to={"/"}>
+        <div className="flex items-center gap-2 px-1 py-3 cursor-pointer hover:bg-neutral-700">
+          <img src={logotipo} alt="Coopago" className="w-10 h-10" />
+          <span className="text-neutral-200 text-lg">CooPagos</span>
+        </div>
+      </Link>
+    
 
       <div className="py-8 flex flex-1 flex-col gap-0.5">
         {DASHBOARD_SIDEBAR_LINKS.map((link) => (
@@ -78,7 +78,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           <span className="text-xl">
             <HiOutlineLogout />
           </span>
-          Logout
+          Cerrar Sesión
         </div>
       </div>
     </div>

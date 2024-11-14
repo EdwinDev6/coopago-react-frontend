@@ -1,50 +1,14 @@
 import {
-  HiOutlineViewGrid,
-  HiOutlineCube,
-  HiOutlineShoppingCart,
   HiOutlineUsers,
-  HiOutlineDocumentText,
-  HiOutlineAnnotation,
   HiOutlineQuestionMarkCircle,
 } from "react-icons/hi";
 
 export const DASHBOARD_SIDEBAR_LINKS = [
   {
-    key: "transactions",
-    label: "Nomina",
-    path: "/",
-    icon: <HiOutlineDocumentText />,
-  },
-
-  {
-    key: "about",
-    label: "About",
-    path: "/about",
-    icon: <HiOutlineViewGrid />,
-  },
-  {
-    key: "procedure",
+    key: "Beneficiario",
     label: "Registrar Beneficiarios",
-    path: "/procedure/p_registrar_beneficiarios",
-    icon: <HiOutlineCube />,
-  },
-  {
-    key: "orders",
-    label: "Orders",
-    path: "/orders",
-    icon: <HiOutlineShoppingCart />,
-  },
-  {
-    key: "beneficiaries",
-    label: "Beneficiarios",
-    path: "/beneficiaries",
+    path: "/RegistrarBeneficiarios",
     icon: <HiOutlineUsers />,
-  },
-  {
-    key: "messages",
-    label: "Messages",
-    path: "/messages",
-    icon: <HiOutlineAnnotation />,
   },
 ];
 
