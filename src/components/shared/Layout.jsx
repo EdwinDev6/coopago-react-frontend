@@ -16,12 +16,12 @@ export default function Layout() {
   return (
     <div className="bg-neutral-100 h-screen w-screen overflow-hidden flex flex-row">
       <Sidebar isOpen={isOpen} closeSidebar={closeSidebar} />
-      {/* <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1">
         <Header toggleSidebar={toggleSidebar} isOpen={isOpen} />
         <main className="flex-1 p-4 min-h-0 overflow-auto">
           <Outlet />
         </main>
-      </div> */}
+      </div>
     </div>
   );
 }
