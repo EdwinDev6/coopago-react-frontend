@@ -1,22 +1,16 @@
-import { useState } from "react";
+import React from "react";
 
-export const TextInput = ({ label, name, value, onChange }) => {
-  const [localValue, setLocalValue] = useState(value);
-
-  const handleInputChange = (e) => {
-    setLocalValue(e.target.value);
-    onChange(e); // update parent state
-  };
-
+export const TextInput = React.memo(({ label, name, value, onChange }) => {
   return (
     <div>
-      <label>{label}</label>
+      <label htmlFor={name}>{label}</label>
       <input
         type="text"
+        id={name}
         name={name}
-        value={localValue}
-        onChange={handleInputChange}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
-};
+});
