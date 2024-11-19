@@ -1,37 +1,27 @@
-import React, { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
-import TableComponent from "../table/Table";
-import { executeProcedure } from "../../api/index";
-
+import React from 'react'
+import { useState, useCallback } from 'react'
+import { SelectInput } from '../Inputs/SelectInput'
 export const RegisterBeneficiary = () => {
-  const { auth } = useAuth({});
-  const [beneficiariesData, setBeneficiariesData] = useState([]);
+  const [elementValue, setElementValue] = useState("")
 
-  const fetchBeneficiariesData = async () => {
-    try {
-      const schema = "dbo";
-      const data = await executeProcedure("p_traer_beneficiarios", schema);
-      setBeneficiariesData(
-        Array.isArray(data.result.recordset) ? data.result.recordset : []
-      );
-      console.log("Beneficiaries data:", data.result.recordset);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
-  useEffect(() => {
-    fetchBeneficiariesData();
-  }, []);
+  const handleElementChange = useCallback((event) => {
 
+  }, [elementValue])
+  const handleInputChange = useCallback(() => {
+    const {name, value} = e.target
+    setFormData({
+      ...formData, [name]: value
+    })
+  }, [])
+
+  const handleSubmit = useCallback((e) => {
+    e.preventByDefault();
+    console.log("Form data", formData)
+  })
   return (
-    <div className="flex-col min-h-screen flex justify-center items-center relative">
-      <div className="w-full absolute top-10">
-        <h1 className="text-mainTableColor font-bold text-3xl">
-          Beneficiarios
-        </h1>
-        <TableComponent data={beneficiariesData} search={true} />
-      </div>
-    </div>
-  );
-};
+    <form onSubmit={handleSubmit}>
+      <SelectInput label="Elementos" name="element" value={elementValue} onChange={handleElementChange} filter="ELEMENTOS"/>
+    </form>
+  )
+}

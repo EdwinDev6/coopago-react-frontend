@@ -41,3 +41,21 @@ export const logoutUser = () => {
       });
   });
 };
+
+export const getFilters = (w) => {
+  return new Promise((success, reject) => {
+    Axios.post(
+      "procedures/execute",
+      {"procedureName": "p_traer_filtros",
+        "procedureParams": {"RENGLON": `${w}`}
+      },
+      { headers: { "Content-Type": "application/json" } }
+    )
+      .then(({data}) => {
+        const result = data?.result?.recordsets
+        success(result)
+      })
+      .catch(({ response }) => {
+      });
+  });
+};
