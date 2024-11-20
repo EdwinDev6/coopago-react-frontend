@@ -21,7 +21,7 @@ export const RegisterBeneficiary = () => {
   })
   return (
     <form onSubmit={handleSubmit}>
-      <SelectInput label="Elementos" name="element" value={elementValue} onChange={handleElementChange} filter="ELEMENTOS"/>
+      <SelectInput label="Elementos" name="element" value={elementValue} selected="ELEGIR ELEMENTO" onChange={handleElementChange} filter="ELEMENTOS"/>
     </form>
   )
 }
