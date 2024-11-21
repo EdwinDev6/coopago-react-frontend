@@ -16,9 +16,9 @@ export default function Header({ toggleSidebar, isOpen }) {
   }, []);
 
   return (
-    <div className="bg-white h-16 px-4 flex items-center border-b border-gray-200 justify-between overflow-hidden">
+    <div className="bg-white h-12 px-4 flex items-center border-b border-gray-200 justify-between overflow-hidden">
       <button
-        className="text-black text-3xl md:hidden border border-gray-400 rounded-md p-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        className="text-black text-2xl md:hidden border border-gray-400 rounded-md p-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         onClick={toggleSidebar}
       >
         <MdMenuOpen />

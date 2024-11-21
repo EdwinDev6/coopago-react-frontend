@@ -18,7 +18,7 @@ export default function Layout() {
       <Sidebar isOpen={isOpen} closeSidebar={closeSidebar} />
       <div className="flex flex-col flex-1">
         <Header toggleSidebar={toggleSidebar} isOpen={isOpen} />
-        <main className="flex-1 p-4 min-h-0 overflow-auto">
+        <main className="flex-1 p-4 min-h-0 overflow-auto custom-scrollbar">
           <Outlet />
         </main>
       </div>
