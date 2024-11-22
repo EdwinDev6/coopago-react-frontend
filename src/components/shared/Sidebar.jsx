@@ -109,6 +109,10 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           label="Beneficiarios"
           icon={<FaUsers />}
           options={[
+            {
+              label: "Consultar Beneficiarios",
+              path: "/RegistrarBeneficiarios",
+            },
             { label: "Beneficiarios Interno", path: "/beneficiario-interno" },
             {
               label: "Beneficiario Institucion Asociada",
