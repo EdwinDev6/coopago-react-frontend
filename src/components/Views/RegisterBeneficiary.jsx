@@ -9,9 +9,11 @@ export const RegisterBeneficiary = () => {
 
   const fetchBeneficiariesData = async () => {
     try {
-      const schema = "AppCooperativa"; 
-      const data = await executeProcedure("p_traer_menu", schema);
-      setBeneficiariesData(Array.isArray(data.result.recordset) ? data.result.recordset : []);
+      const schema = "dbo";
+      const data = await executeProcedure("p_traer_beneficiarios", schema);
+      setBeneficiariesData(
+        Array.isArray(data.result.recordset) ? data.result.recordset : []
+      );
       console.log("Beneficiaries data:", data.result.recordset);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -23,8 +25,11 @@ export const RegisterBeneficiary = () => {
   }, []);
 
   return (
-    <div className="flex-col min-h-screen p-4 bg-neutral-100 flex justify-center items-center">
-      <div className="w-full sm:w-2/3 md:max-w-3xl ">
+    <div className="flex-col min-h-screen flex justify-center items-center relative">
+      <div className="w-full absolute top-10">
+        <h1 className="text-mainTableColor font-bold text-3xl">
+          Beneficiarios
+        </h1>
         <TableComponent data={beneficiariesData} search={true} />
       </div>
     </div>
