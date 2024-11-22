@@ -18,15 +18,26 @@ export const authUser = (user) => {
   });
 };
 
+export const executeProcedure = (procedureName, schema) => {
+  return new Promise((success, reject) => {
+    Axios.post("procedures/execute", { procedureName, schema})
+      .then(({ data }) => {
+        success(data);
+      })
+      .catch(({ response }) => {
+        reject(response);
+      });
+  });
+};
+
 export const logoutUser = () => {
   return new Promise((success, reject) => {
-    Axios.get('logout').then((res) => {
-      success(res);
-    }
-
-    ).catch(({response}) => {
-      reject(response)
-    })
-
-  })
-}
+    Axios.get("logout")
+      .then((res) => {
+        success(res);
+      })
+      .catch(({ response }) => {
+        reject(response);
+      });
+  });
+};

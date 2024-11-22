@@ -1,15 +1,12 @@
-import {
-  HiOutlineUsers,
-  HiOutlineQuestionMarkCircle,
-} from "react-icons/hi";
+import { HiOutlineUsers, HiOutlineQuestionMarkCircle } from "react-icons/hi";
 
 export const DASHBOARD_SIDEBAR_LINKS = [
-  {
-    key: "Beneficiario",
-    label: "Registrar Beneficiarios",
-    path: "/RegistrarBeneficiarios",
-    icon: <HiOutlineUsers />,
-  },
+  // {
+  //   key: "Beneficiario",
+  //   label: "Registrar Beneficiarios",
+  //   path: "/RegistrarBeneficiarios",
+  //   icon: <HiOutlineUsers />,
+  // },
 ];
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
