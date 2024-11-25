@@ -2,9 +2,10 @@ import React from "react";
 import { useState, useCallback } from "react";
 import { SelectInput } from "../Inputs/SelectInput";
 import { TextInput } from "../Inputs/TextInput";
+import { executeProcedure } from "../../api";
 export const RegisterBeneficiary = () => {
   const [accountType, setAccountType] = useState("");
-  const [idType, setIdType] = useState("")
+  const [idType, setIdType] = useState("");
   const [id, setId] = useState("");
   const [account, setAccount] = useState("");
   const [reference, setReference] = useState("");
@@ -12,22 +13,21 @@ export const RegisterBeneficiary = () => {
   const [email, setEmail] = useState("");
 
   const handleAccountTypeChange = useCallback((event) => {
-    setAccountType(event.target.value)
+    setAccountType(event.target.value);
   }, []);
 
   const handleIdTypeChange = useCallback((event) => {
-    setIdType(event.target.value)
+    setIdType(event.target.value);
   }, []);
 
   const handleIdChange = useCallback((e) => {
     setId(e.target.value);
-    if(e.target.value?.length > 9){
-      
+    if (e.target.value?.length > 9) {
     }
   }, []);
 
   const handleAccountChange = useCallback((event) => {
-    setAccount(event.target.value)
+    setAccount(event.target.value);
   }, []);
 
   const handleReferenceChange = useCallback((event) => {
@@ -36,15 +36,14 @@ export const RegisterBeneficiary = () => {
 
   const handleBeneficiaryChange = useCallback((event) => {
     setBeneficiary(event.target.value);
-
-  },[])
+  }, []);
 
   const handleEmailChange = useCallback((event) => {
     setEmail(event.target.value);
   }, []);
 
   const handleSubmit = useCallback((event) => {
-    event.preventDefault()
+    event.preventDefault();
     console.log("Form data", {
       accountType,
       id,
@@ -53,9 +52,20 @@ export const RegisterBeneficiary = () => {
       beneficiary,
       email,
     });
+    executeProcedure(
+      "p_registrar_beneficiarios",
+      { beneficiario: beneficiary, id_cuenta: account, identificacion: id },
+      "dbo"
+    )
+      .then((data) => {console.log(data)})
+      .catch((data) => {console.log(data)});
   });
   return (
-    <form className="max-w-sm mx-auto my-auto" onSubmit={handleSubmit} autoComplete="off">
+    <form
+      className="max-w-sm mx-auto my-auto"
+      onSubmit={handleSubmit}
+      autoComplete="off"
+    >
       {/* <SelectInput
         label="Tipo de cuenta"
         name="tipocuenta"

@@ -18,9 +18,9 @@ export const authUser = (user) => {
   });
 };
 
-export const executeProcedure = (procedureName, schema) => {
+export const executeProcedure = (procedureName, procedureParams, schema) => {
   return new Promise((success, reject) => {
-    Axios.post("procedures/execute", { procedureName, schema})
+    Axios.post("procedures/execute", { procedureName, procedureParams, schema})
       .then(({ data }) => {
         success(data);
       })
