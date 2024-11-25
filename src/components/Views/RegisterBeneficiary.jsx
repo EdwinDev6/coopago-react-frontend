@@ -11,24 +11,40 @@ export const RegisterBeneficiary = () => {
   const [beneficiary, setBeneficiary] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleAccountTypeChange = useCallback((event) => {}, [accountType]);
-  const handleIdTypeChange = useCallback((event) => {}, []);
-  const handleIdChange = useCallback((e) => {
-    setId(e.target.value);
+  const handleAccountTypeChange = useCallback((event) => {
+    setAccountType(event.target.value)
   }, []);
 
-  const handleAccountChange = useCallback((event) => {}, []);
+  const handleIdTypeChange = useCallback((event) => {
+    setIdType(event.target.value)
+  }, []);
+
+  const handleIdChange = useCallback((e) => {
+    setId(e.target.value);
+    if(e.target.value?.length > 9){
+      
+    }
+  }, []);
+
+  const handleAccountChange = useCallback((event) => {
+    setAccount(event.target.value)
+  }, []);
 
   const handleReferenceChange = useCallback((event) => {
     setReference(event.target.value);
   }, []);
 
+  const handleBeneficiaryChange = useCallback((event) => {
+    setBeneficiary(event.target.value);
+
+  },[])
+
   const handleEmailChange = useCallback((event) => {
     setEmail(event.target.value);
   }, []);
 
-  const handleSubmit = useCallback((e) => {
-    e.preventByDefault();
+  const handleSubmit = useCallback((event) => {
+    event.preventDefault()
     console.log("Form data", {
       accountType,
       id,
@@ -39,35 +55,40 @@ export const RegisterBeneficiary = () => {
     });
   });
   return (
-    <form className="max-w-sm mx-auto my-auto" onSubmit={handleSubmit}>
-      <SelectInput
+    <form className="max-w-sm mx-auto my-auto" onSubmit={handleSubmit} autoComplete="off">
+      {/* <SelectInput
         label="Tipo de cuenta"
         name="tipocuenta"
         value={accountType}
         selected="ELIGE EL TIPO DE CUENTA"
         onChange={handleAccountTypeChange}
+        data={[{value: 0, desc: "CUENTA DE AHORROS"}, {value: 1, desc: "CUENTA CORRIENTE"}]}
+        size={2}
       />
       <SelectInput
         label="Tipo de identificacion"
         name="tipoidentificacion"
         value={idType}
-        selected="ELIGE EL TIPO DE IDENTIFICACION"
         onChange={handleIdTypeChange}
-      />
+        data={[{value: 0, desc: "CEDULA"}, {value: 1, desc: "RNC"}, {value: 2, desc: "PASAPORTE"}]}
+        size={2}
+      /> */}
       <TextInput
-        label="Identificacion"
+        label="Identificacion *"
         name="identificacion"
         value={id}
         onChange={handleIdChange}
         max={14}
+        size={2}
       />
 
-      <SelectInput
-        label="Cuenta"
+      <TextInput
+        label="Cuenta *"
         name="cuenta"
         value={account}
-        selected="ELIGE LA CUENTA"
+        placeholder="DIGITE EL NUMERO DE CUENTA"
         onChange={handleAccountChange}
+        size={2}
       />
 
       <TextInput
@@ -75,14 +96,16 @@ export const RegisterBeneficiary = () => {
         name="referencia"
         value={reference}
         onChange={handleReferenceChange}
+        size={2}
       />
 
       <TextInput
-        label="Beneficiario"
+        label="Beneficiario *"
         name="beneficiario"
         value={beneficiary}
-        onChange={handleIdChange}
-        disabled={true}
+        onChange={handleBeneficiaryChange}
+        //disabled={true}
+        size={2}
       />
 
       <TextInput
@@ -90,6 +113,7 @@ export const RegisterBeneficiary = () => {
         name="correo"
         value={email}
         onChange={handleEmailChange}
+        size={2}
       />
 
       <button
