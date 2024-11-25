@@ -1,73 +1,28 @@
 import { useState } from "react";
-import { loginUrl } from "../../config";
-import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { authUser } from "../../api";
 
 export default function Login() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-
   const { setAuth } = useAuth();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(loginUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          usuario: user,
-          contrasena: password,
-        }),
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = { username: user, password: password };
+    authUser(data)
+      .then((res) => {
+        console.log(res.user)
+        setAuth({ user: res?.user });
+        navigate(from, {replace: true});
+      })
+      .catch((res) => {
+        setErrorMessage(res.data.error);
       });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        setErrorMessage(result.message || "Usuario o Contraseña incorrectos");
-        setSuccessMessage("");
-        return;
-      }
-
-      const userData = result.data;
-
-      setAuth({
-        id: userData.id_usuario,
-        user: userData.usuario,
-        lastSession: userData.ultima_sesion,
-        db: result.database,
-        server: result.database.server,
-        port: result.database.port,
-        options: result.database.options,
-      });
-
-      sessionStorage.setItem(
-        "auth",
-        JSON.stringify({
-          id: userData.id_usuario,
-          user: userData.usuario,
-          lastSession: userData.ultima_sesion,
-          db: result.database,
-          server: result.database.server,
-          port: result.database.port,
-          options: result.database.options,
-        })
-      );
-
-      setSuccessMessage("Inicio de sesión exitoso");
-      setErrorMessage("");
-      navigate("/");
-    } catch (error) {
-      setErrorMessage("Error del servidor: " + error.message);
-      setSuccessMessage("");
-    }
   };
 
   return (
@@ -146,11 +101,6 @@ export default function Login() {
               >
                 <span className="font-medium"> {errorMessage} </span>
               </div>
-            )}
-            {successMessage && (
-              <p className="mt-4 text-center text-sm text-green-500">
-                {successMessage}
-              </p>
             )}
           </form>
 
