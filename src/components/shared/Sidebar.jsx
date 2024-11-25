@@ -27,7 +27,6 @@ export default function Sidebar({ isOpen, closeSidebar }) {
         navigate("/login")
       });
   };
-  console.log("Sidebar")
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {

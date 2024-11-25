@@ -1,16 +1,25 @@
 import React, { useState } from "react";
-import { getFilters } from "../../api";
+
 export const SelectInput = React.memo(
-  ({ label, name, value, selected, onChange, filter }) => {
-    console.log(`Console from ${name}`);
-    const [data, setData] = useState([]);
-    React.useEffect(() => {
-      getFilters(filter)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((res) => {});
-    }, []);
+  ({
+    label,
+    name,
+    value,
+    onChange,
+    data = [{ value: 0, desc: "" }],
+    size = 1,
+  }) => {
+    let classSize = "";
+    switch (size) {
+      case 2:
+        classSize = "p-3 text-md";
+        break;
+      case 3:
+        classSize = "p-4 text-md";
+        break;
+      default:
+        classSize = "p-2.5 text-sm";
+    }
     return (
       <div className="mb-2">
         <label
@@ -20,12 +29,17 @@ export const SelectInput = React.memo(
           {label}
         </label>
         <select
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className={`bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ${classSize}`}
           id={name}
           name={name}
           value={value}
           onChange={onChange}
         >
+          {data.map((item, index) => (
+            <option key={index} value={item.value}>
+              {item.desc}
+            </option>
+          ))}
         </select>
       </div>
     );
