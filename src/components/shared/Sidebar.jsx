@@ -110,8 +110,12 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           icon={<FaUsers />}
           options={[
             {
-              label: "Consultar Beneficiarios",
+              label: "Registrar Beneficiarios",
               path: "/RegistrarBeneficiarios",
+            },
+            {
+              label: "Consultar Beneficiarios",
+              path: "/consultarBeneficiarios",
             },
             { label: "Beneficiarios Interno", path: "/beneficiario-interno" },
             {
