@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { FaSortAlphaDownAlt, FaSortAlphaUp } from "react-icons/fa";
-import TableFilter from "./DinamicFilter";
 import TableToExcel from "./Excel";
 import TableToPDF from "./Pdf";
+import ColumnFilter from "./DinamicFilter";
 
 const TableComponent = ({ data, columns, search }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,7 +15,7 @@ const TableComponent = ({ data, columns, search }) => {
 
   useEffect(() => {
     if (data.length > 0) {
-      const initialColumns = columns.map(col => col.accessor);
+      const initialColumns = columns.map((col) => col.accessor);
       setSelectedColumns(initialColumns);
     } else {
       setSelectedColumns([]);
@@ -134,28 +134,29 @@ const TableComponent = ({ data, columns, search }) => {
         <table className="w-full text-xs text-left text-gray-700 border border-gray-300">
           <thead className="bg-mainTableColor text-white sticky top-0 z-10">
             <tr>
-              {columns.map((col, index) => (
-                <th
-                  key={index}
-                  className="px-8 py-2 cursor-pointer"
-                  onClick={() => handleSort(col.accessor)}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="whitespace-nowrap">
-                      {col.Header}
-                    </span>
-                    {sortConfig.key === col.accessor && (
-                      <span className="ml-1">
-                        {sortConfig.direction === "asc" ? (
-                          <FaSortAlphaUp />
-                        ) : (
-                          <FaSortAlphaDownAlt />
+              {columns.map(
+                (col, index) =>
+                  selectedColumns.includes(col.accessor) && (
+                    <th
+                      key={index}
+                      className="px-8 py-2 cursor-pointer"
+                      onClick={() => handleSort(col.accessor)}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="whitespace-nowrap">{col.Header}</span>
+                        {sortConfig.key === col.accessor && (
+                          <span className="ml-1">
+                            {sortConfig.direction === "asc" ? (
+                              <FaSortAlphaUp />
+                            ) : (
+                              <FaSortAlphaDownAlt />
+                            )}
+                          </span>
                         )}
-                      </span>
-                    )}
-                  </div>
-                </th>
-              ))}
+                      </div>
+                    </th>
+                  )
+              )}
             </tr>
           </thead>
 
@@ -166,27 +167,29 @@ const TableComponent = ({ data, columns, search }) => {
                   key={rowIndex}
                   className="odd:bg-zebraPrimary even:bg-zebraColor"
                 >
-                  {columns.map((col, colIndex) => (
-                    <td
-                      key={colIndex}
-                      className={`px-8 py-1 border-t`}
-                      style={{ fontWeight: col.isPrimary ? "bold" : "normal" }}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="whitespace-nowrap">
-                          {row[col.accessor] || "N/A"}
-                        </span>
-                      </div>
-                    </td>
-                  ))}
+                  {columns.map(
+                    (col, colIndex) =>
+                      selectedColumns.includes(col.accessor) && (
+                        <td
+                          key={colIndex}
+                          className={`px-8 py-1 border-t`}
+                          style={{
+                            fontWeight: col.isPrimary ? "bold" : "normal",
+                          }}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="whitespace-nowrap">
+                              {row[col.accessor] || "N/A"}
+                            </span>
+                          </div>
+                        </td>
+                      )
+                  )}
                 </tr>
               ))
             ) : (
               <tr>
-                <td
-                  colSpan={columns.length}
-                  className="px-2 py-1 text-center"
-                >
+                <td colSpan={columns.length} className="px-2 py-1 text-center">
                   No hay datos disponibles
                 </td>
               </tr>
@@ -208,36 +211,31 @@ const TableComponent = ({ data, columns, search }) => {
       {data.length > 0 && (
         <div className="flex justify-between items-center w-full mt-2">
           <div className="flex items-center gap-0">
-            <TableFilter
+            <ColumnFilter
               columns={columns}
               selectedColumns={selectedColumns}
-              onToggleColumn={handleColumnToggle}
+              onColumnToggle={handleColumnToggle}
             />
-            <TableToExcel data={filteredData} selectedColumns={selectedColumns} />
+            <TableToExcel
+              data={filteredData}
+              selectedColumns={selectedColumns}
+            />
             <TableToPDF data={filteredData} selectedColumns={selectedColumns} />
           </div>
 
           <div className="flex items-center gap-8">
             <button
               onClick={prev}
-              disabled={currentPage === 1}
-              className={`p-1 rounded-full border ${
-                currentPage === 1 ? "text-gray-300" : "text-gray-700"
-              }`}
+              className="px-3 py-1 text-xs font-semibold text-white bg-gray-600 rounded-md"
             >
-              <HiChevronLeft className="h-5 w-5" />
+              <HiChevronLeft />
             </button>
-            <span className="text-gray-700">
-              Página <strong>{currentPage}</strong> de <strong>{totalPages}</strong>
-            </span>
+            <span className="text-xs font-semibold">{`Página ${currentPage} de ${totalPages}`}</span>
             <button
               onClick={next}
-              disabled={currentPage === totalPages}
-              className={`p-1 rounded-full border ${
-                currentPage === totalPages ? "text-gray-300" : "text-gray-700"
-              }`}
+              className="px-3 py-1 text-xs font-semibold text-white bg-gray-600 rounded-md"
             >
-              <HiChevronRight className="h-5 w-5" />
+              <HiChevronRight />
             </button>
           </div>
         </div>
