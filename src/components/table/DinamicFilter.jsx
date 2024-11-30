@@ -64,7 +64,7 @@ const ColumnFilter = ({ columns, selectedColumns, onColumnToggle }) => {
             <span className="text-sm">Todos</span>
           </div>
 
-          <div className="max-h-40 overflow-y-auto">
+          <div className="max-h-20 overflow-y-auto">
             {columns.map((column) => (
               <div
                 key={column.accessor}
