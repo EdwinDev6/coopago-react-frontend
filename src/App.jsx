@@ -9,6 +9,7 @@ import PrivateRoute from "./components/protectedRoute/PrivatedRoute";
 import { AuthProvider } from "./context/AuthProvider";
 import { RegisterBeneficiary } from "./components/Views/RegisterBeneficiary";
 import { ViewBeneficiary } from "./components/Views/ViewBeneficiary";
+import { ViewBeneficiary2 } from "./components/Views/ViewBeneficiary2";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="RegistrarBeneficiarios" element={<RegisterBeneficiary/>} />
-          <Route path="consultarBeneficiarios" element={<ViewBeneficiary/>} />
+          <Route path="consultarBeneficiarios" element={<ViewBeneficiary2/>} />
         </Route>
       </Route>
 
