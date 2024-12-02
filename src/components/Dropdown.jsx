@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { useRef } from "react";
 
-const Dropdown = ({ label, options, isActive, toggleDropdown, icon, closeSidebar }) => {
+const Dropdown = ({
+  label,
+  options,
+  isActive,
+  toggleDropdown,
+  icon,
+  closeSidebar,
+}) => {
   const dropdownRef = useRef();
 
   return (
