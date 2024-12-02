@@ -1,8 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
+import { useRef } from "react";
 
-const Dropdown = ({ label, options, isActive, toggleDropdown, icon }) => {
+const Dropdown = ({
+  label,
+  options,
+  isActive,
+  toggleDropdown,
+  icon,
+  closeSidebar,
+}) => {
+  const dropdownRef = useRef();
+
   return (
     <div className="relative w-full md:w-auto">
       <button
@@ -19,15 +29,18 @@ const Dropdown = ({ label, options, isActive, toggleDropdown, icon }) => {
       </button>
 
       <div
-        className={`${
-          isActive ? "max-h-40" : "max-h-0"
-        } transition-all duration-500 ease-in-out overflow-hidden bg-neutral-800 rounded-md shadow-lg`}
+        ref={dropdownRef}
+        className={`transition-all duration-500 ease-in-out overflow-hidden bg-neutral-800 rounded-md shadow-lg`}
+        style={{
+          maxHeight: isActive ? `${dropdownRef.current?.scrollHeight}px` : "0",
+        }}
       >
         {options.map((option, index) => (
           <Link
             key={index}
             to={option.path}
             className="block px-4 py-2 mt-2 text-neutral-400 hover:bg-neutral-700 hover:text-textHoverColor font-light hover:font-semibold"
+            onClick={closeSidebar}
           >
             {option.label}
           </Link>

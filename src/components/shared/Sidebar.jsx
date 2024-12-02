@@ -93,6 +93,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           ]}
           isActive={activeDropdown === "Cuentas"}
           toggleDropdown={() => toggleDropdown("Cuentas")}
+          closeSidebar={closeSidebar}
         />
         <Dropdown
           label="Pagos"
@@ -104,6 +105,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           ]}
           isActive={activeDropdown === "Pagos"}
           toggleDropdown={() => toggleDropdown("Pagos")}
+          closeSidebar={closeSidebar}
         />
         <Dropdown
           label="Beneficiarios"
@@ -125,6 +127,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           ]}
           isActive={activeDropdown === "Beneficiarios"}
           toggleDropdown={() => toggleDropdown("Beneficiarios")}
+          closeSidebar={closeSidebar}
         />
         <Dropdown
           label="Consultas"
@@ -135,6 +138,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           ]}
           isActive={activeDropdown === "Consultas"}
           toggleDropdown={() => toggleDropdown("Consultas")}
+          closeSidebar={closeSidebar}
         />
       </div>
 
