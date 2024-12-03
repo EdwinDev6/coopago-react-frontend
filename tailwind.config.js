@@ -13,6 +13,7 @@ export default {
         mainTableColor: "#1e293b",
         focusColor: "#1d4ed8",
         zebraColor: "#cbd5e1",
+        hoverTable: "#374151",
       },
     },
   },
