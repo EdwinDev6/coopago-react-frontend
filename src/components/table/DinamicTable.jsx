@@ -73,6 +73,16 @@ const TableComponent = ({ data, columns, search }) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1);
   };
+
+  const handleClick = (e, row) => {
+    if (window.innerWidth <= 768) {
+      setSelectedRow(row);
+      setIsModalOpen(true);
+    } else {
+      handleDoubleClick(row);
+    }
+  };
+
   const handleDoubleClick = (row) => {
     setSelectedRow(row);
     setIsModalOpen(true);
@@ -177,7 +187,7 @@ const TableComponent = ({ data, columns, search }) => {
               currentData.map((row, rowIndex) => (
                 <tr
                   key={rowIndex}
-                  onDoubleClick={() => handleDoubleClick(row)}
+                  onClick={(e) => handleClick(e, row)}
                   className="odd:bg-zebraPrimary even:bg-zebraColor cursor-pointer hover:bg-hoverTable hover:text-white"
                 >
                   {columns.map(

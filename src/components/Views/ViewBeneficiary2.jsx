@@ -11,7 +11,7 @@ export const ViewBeneficiary2 = () => {
   // Fetch de los beneficiarios
   const fetchBeneficiariesData = async () => {
     try {
-      const schema = "dbo";
+      const schema = "CoopPagos";
       const data = await executeProcedure("p_traer_beneficiarios", schema);
       setBeneficiariesData(
         Array.isArray(data.result.recordset) ? data.result.recordset : []
@@ -24,7 +24,7 @@ export const ViewBeneficiary2 = () => {
   // Fetch de los encabezados de la tabla
   const fetchColumns = async () => {
     try {
-      const schema = "dbo";
+      const schema = "CoopPagos";
       const dataFilter = await executeProcedure(
         "p_traer_encabezado_consultas",
         { RENGLON: "COOPPAGOS_BENEFICIARIOS" },
