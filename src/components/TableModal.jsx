@@ -47,6 +47,9 @@ const Modal = ({ row, columns, onClose, onUpdate }) => {
     setIsSuccessOpen(false);
     setError("");
     onClose();
+    if (onUpdate) {
+      onUpdate();
+    }
   };
 
   return (

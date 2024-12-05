@@ -21,6 +21,10 @@ export const ViewBeneficiary2 = () => {
     }
   };
 
+  const refreshTable = async () => {
+    await fetchBeneficiariesData();
+  };
+
   // Fetch de los encabezados de la tabla
   const fetchColumns = async () => {
     try {
@@ -64,6 +68,7 @@ export const ViewBeneficiary2 = () => {
           data={beneficiariesData}
           columns={columns}
           search={true}
+          onUpdate={refreshTable}
         />
       </div>
     </div>
