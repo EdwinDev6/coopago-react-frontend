@@ -14,7 +14,7 @@ export const ViewBeneficiary2 = () => {
       const schema = "CoopPagos";
       const data = await executeProcedure("p_traer_beneficiarios", schema);
       setBeneficiariesData(
-        Array.isArray(data.result.recordset) ? data.result.recordset : []
+        Array.isArray(data.data.recordsets[0]) ? data.data.recordsets[0] : []
       );
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -35,7 +35,7 @@ export const ViewBeneficiary2 = () => {
         schema
       );
 
-      const columnDefs = dataFilter.result.recordset
+      const columnDefs = dataFilter.data.recordsets[0]
         .filter((col) => col.visible === 1)
         .map((col) => ({
           Header: col.titulo,
@@ -69,6 +69,10 @@ export const ViewBeneficiary2 = () => {
           columns={columns}
           search={true}
           onUpdate={refreshTable}
+          programa={"beneficiarios"}
+          tabla={"beneficiarios"}
+          campos={"id_beneficiario"}
+          id={"id_beneficiario"}
         />
       </div>
     </div>

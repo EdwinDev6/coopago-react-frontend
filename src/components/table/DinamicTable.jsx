@@ -7,7 +7,16 @@ import TableToPDF from "./Pdf";
 import ColumnFilter from "./DinamicFilter";
 import Modal from "../TableModal";
 
-const TableComponent = ({ data, columns, search,onUpdate }) => {
+const TableComponent = ({
+  data,
+  columns,
+  search,
+  onUpdate,
+  programa,
+  tabla,
+  campos,
+  id,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedColumns, setSelectedColumns] = useState([]);
@@ -264,7 +273,16 @@ const TableComponent = ({ data, columns, search,onUpdate }) => {
         </div>
       )}
       {isModalOpen && (
-        <Modal row={selectedRow} columns={columns} onClose={closeModal} onUpdate={onUpdate} />
+        <Modal
+          row={selectedRow}
+          columns={columns}
+          onClose={closeModal}
+          onUpdate={onUpdate}
+          programa={programa}
+          tabla={tabla}
+          campos={campos}
+          id={id}
+        />
       )}
     </div>
   );
