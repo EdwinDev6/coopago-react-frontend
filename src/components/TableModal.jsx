@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { executeProcedure } from "../api/index";
 
-const Modal = ({ row, columns, onClose, onUpdate }) => {
+const Modal = ({
+  row,
+  columns,
+  onClose,
+  onUpdate,
+  programa,
+  tabla,
+  campos,
+  id,
+}) => {
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -16,17 +25,17 @@ const Modal = ({ row, columns, onClose, onUpdate }) => {
     try {
       const procedureName = "p_registrar_eliminacion";
       const schema = "CoopPagos";
-      const idBeneficiario = row.id_beneficiario;
+      const valor = row[id];
 
       const procedureParams = {
-        programa: "beneficiarios",
+        programa: programa,
         json: JSON.stringify({
-          tabla: "beneficiarios",
-          campos: "id_beneficiario",
-          valores: idBeneficiario,
+          tabla: tabla,
+          campos: campos,
+          valores: valor,
         }),
       };
-
+      console.log(procedureParams);
       await executeProcedure(procedureName, procedureParams, schema);
 
       setSuccessMessage("Registro eliminado exitosamente.");
@@ -74,7 +83,7 @@ const Modal = ({ row, columns, onClose, onUpdate }) => {
           </div>
           <div className="flex justify-end gap-2 mt-4">
             <button
-              onClick={() => setIsConfirmationOpen(true)} // Abre el modal de confirmación
+              onClick={() => setIsConfirmationOpen(true)}
               className="px-4 py-2 bg-red-500 text-white rounded"
             >
               Eliminar
@@ -130,7 +139,7 @@ const Modal = ({ row, columns, onClose, onUpdate }) => {
             <h3 className="text-lg font-semibold mb-2">¡Éxito!</h3>
             <p>{successMessage}</p>
             <button
-              onClick={closeAllModals} // Cierra todos los modales
+              onClick={closeAllModals}
               className="mt-4 px-4 py-2 bg-white text-green-500 rounded"
             >
               Cerrar
@@ -146,7 +155,7 @@ const Modal = ({ row, columns, onClose, onUpdate }) => {
             <h3 className="text-lg font-semibold mb-2">¡Error!</h3>
             <p>{error}</p>
             <button
-              onClick={() => setError("")} // Cierra el modal de error
+              onClick={() => setError("")}
               className="mt-4 px-4 py-2 bg-white text-red-500 rounded"
             >
               Cerrar
