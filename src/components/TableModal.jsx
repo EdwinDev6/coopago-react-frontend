@@ -35,7 +35,6 @@ const Modal = ({
           valores: valor,
         }),
       };
-      console.log(procedureParams);
       await executeProcedure(procedureName, procedureParams, schema);
 
       setSuccessMessage("Registro eliminado exitosamente.");
