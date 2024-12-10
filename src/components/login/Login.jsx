@@ -1,27 +1,35 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { authUser } from "../../api";
 
 export default function Login() {
+  //console.log("Login re-render")
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
-  const handleSubmit = async (event) => {
+  const handleUserChange = useCallback((event) => {
+    setUser(event.target.value)
+  },[])
+
+  const handlePasswordChange = useCallback((event) => {
+    setPassword(event.target.value)
+  }, [])
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const data = { username: user, password: password };
+    const data = { username: user, password: password, schema: "CoopPagos" };
     authUser(data)
       .then((res) => {
-        console.log(res.user)
         setAuth({ user: res?.user });
         navigate(from, {replace: true});
       })
       .catch((res) => {
-        setErrorMessage(res.data.error);
+        setErrorMessage(res?.data?.error);
       });
   };
 
@@ -53,11 +61,10 @@ export default function Login() {
                   id="user"
                   name="user"
                   type="text"
-                  required
                   autoComplete="username"
                   placeholder="Usuario"
                   value={user}
-                  onChange={(e) => setUser(e.target.value)}
+                  onChange={handleUserChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 p-3"
                 />
               </div>
@@ -75,11 +82,10 @@ export default function Login() {
                   id="password"
                   name="password"
                   type="password"
-                  required
                   autoComplete="current-password"
                   placeholder="Contraseña"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handlePasswordChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 p-3"
                 />
               </div>

@@ -1,13 +1,15 @@
+import { useEffect, useCallback } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { checkSession } from "../../api";
 
 const PrivateRoute = () => {
-  const { auth } = useAuth();
+  const { auth, loading } = useAuth();
+  if(loading){
+    return <div>Loading</div>;
+  }
 
-  const isAuthenticated =
-    auth?.user || JSON.parse(sessionStorage.getItem("auth"))?.user;
-
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  return auth?.user ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

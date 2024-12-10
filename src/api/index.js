@@ -18,9 +18,24 @@ export const authUser = (user) => {
   });
 };
 
+export const checkSession = () => {
+  return new Promise((success, reject) => {
+    Axios.get("session", {
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(({data}) => {
+        success(data)
+      })
+      .catch((res) => {
+        reject(res)
+        console.log(res)
+      });
+  });
+};
+
 export const executeProcedure = (procedureName, procedureParams, schema) => {
   return new Promise((success, reject) => {
-    Axios.post("procedures/execute", { procedureName, procedureParams, schema})
+    Axios.post("procedures/execute", { procedureName, procedureParams, schema })
       .then(({ data }) => {
         success(data);
       })
@@ -46,16 +61,16 @@ export const getFilters = (w) => {
   return new Promise((success, reject) => {
     Axios.post(
       "procedures/execute",
-      {"procedureName": "p_traer_filtros",
-        "procedureParams": {"RENGLON": `${w}`}
+      {
+        procedureName: "p_traer_filtros",
+        procedureParams: { RENGLON: `${w}` },
       },
       { headers: { "Content-Type": "application/json" } }
     )
-      .then(({data}) => {
-        const result = data?.result?.recordsets
-        success(result)
+      .then(({ data }) => {
+        const result = data?.result?.recordsets;
+        success(result);
       })
-      .catch(({ response }) => {
-      });
+      .catch(({ response }) => {});
   });
 };
