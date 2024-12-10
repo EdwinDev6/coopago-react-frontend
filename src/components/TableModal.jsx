@@ -9,7 +9,8 @@ const Modal = ({
   programa,
   tabla,
   campos,
-  id,procedure,
+  id,
+  procedure,
 }) => {
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);

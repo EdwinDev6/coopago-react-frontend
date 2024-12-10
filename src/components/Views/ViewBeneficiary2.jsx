@@ -73,7 +73,7 @@ export const ViewBeneficiary2 = () => {
           tabla={"beneficiarios"}
           campos={"id_beneficiario"}
           id={"id_beneficiario"}
-          procedure={"beneficiario"}
+          procedure={"beneficiarios"}
         />
       </div>
     </div>
