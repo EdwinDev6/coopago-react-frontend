@@ -15,10 +15,40 @@ const Modal = ({
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
+  const [formData, setFormData] = useState(row);
 
-  const handleSave = () => {
-    // Lógica para guardar cambios
-    onClose();
+  const handleChange = (key, value) => {
+    setFormData({
+      ...formData,
+      [key]: value,
+    });
+  };
+
+  const handleSave = async () => {
+    try {
+      const procedureName = "p_registrar_beneficiarios";
+      const schema = "CoopPagos";
+
+      const procedureParams = {
+        id_beneficiario: formData.id_beneficiario,
+        identificacion: formData.identificacion,
+        id_cuenta: formData.id_cuenta,
+        referencia: formData.referencia,
+        beneficiario: formData.beneficiario,
+        correo: formData.correo,
+      };
+
+      await executeProcedure(procedureName, procedureParams, schema);
+
+      setSuccessMessage("Beneficiario guardado exitosamente.");
+      setIsSuccessOpen(true);
+      onUpdate();
+    } catch (error) {
+      console.error("Error al guardar el beneficiario:", error);
+      setError(
+        "Error al guardar el beneficiario. Por favor, inténtalo de nuevo."
+      );
+    }
   };
 
   const handleDelete = async () => {
@@ -40,7 +70,7 @@ const Modal = ({
       setSuccessMessage("Registro eliminado exitosamente.");
       setIsSuccessOpen(true);
     } catch (error) {
-      console.error("Error executing procedure:", error);
+      console.error("Error ejecutando el procedimiento:", error);
       setError("Error eliminando el registro.");
     }
   };
@@ -67,14 +97,15 @@ const Modal = ({
         <div className="bg-white p-4 rounded shadow-md w-96">
           <h2 className="text-lg font-semibold">Editar o Eliminar</h2>
           <div className="mt-4">
-            {Object.entries(row).map(([key, value]) => (
+            {Object.entries(formData).map(([key, value]) => (
               <div key={key} className="mb-2">
                 <label className="block text-sm font-medium">
                   {getColumnHeader(key)}
                 </label>
                 <input
                   type="text"
-                  defaultValue={value}
+                  value={value}
+                  onChange={(e) => handleChange(key, e.target.value)}
                   className="w-full p-2 border rounded"
                 />
               </div>
@@ -138,7 +169,10 @@ const Modal = ({
             <h3 className="text-lg font-semibold mb-2">¡Éxito!</h3>
             <p>{successMessage}</p>
             <button
-              onClick={closeAllModals}
+              onClick={() => {
+                setIsSuccessOpen(false);
+                closeAllModals();
+              }}
               className="mt-4 px-4 py-2 bg-white text-green-500 rounded"
             >
               Cerrar
