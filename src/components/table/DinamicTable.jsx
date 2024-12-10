@@ -15,7 +15,7 @@ const TableComponent = ({
   programa,
   tabla,
   campos,
-  id,
+  id,procedure,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -282,6 +282,7 @@ const TableComponent = ({
           tabla={tabla}
           campos={campos}
           id={id}
+          procedure={procedure}
         />
       )}
     </div>

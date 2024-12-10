@@ -9,7 +9,7 @@ const Modal = ({
   programa,
   tabla,
   campos,
-  id,
+  id,procedure,
 }) => {
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
@@ -26,8 +26,8 @@ const Modal = ({
 
   const handleSave = async () => {
     try {
-      const procedureName = "p_registrar_beneficiarios";
-      const schema = "CoopPagos";
+      const procedureName = `p_registrar_${procedure}`;
+
 
       const procedureParams = Object.entries(formData).reduce(
         (params, [key, value]) => {
@@ -44,7 +44,7 @@ const Modal = ({
         procedureParams.renglon = procedureParams.renglon[0];
       }
 
-      await executeProcedure(procedureName, procedureParams, schema);
+      await executeProcedure(procedureName, procedureParams);
 
       setSuccessMessage("Beneficiario guardado exitosamente.");
       setIsSuccessOpen(true);
