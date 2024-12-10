@@ -29,14 +29,20 @@ const Modal = ({
       const procedureName = "p_registrar_beneficiarios";
       const schema = "CoopPagos";
 
-      const procedureParams = {
-        id_beneficiario: formData.id_beneficiario,
-        identificacion: formData.identificacion,
-        id_cuenta: formData.id_cuenta,
-        referencia: formData.referencia,
-        beneficiario: formData.beneficiario,
-        correo: formData.correo,
-      };
+      const procedureParams = Object.entries(formData).reduce(
+        (params, [key, value]) => {
+          if (key) {
+            params[key] = value;
+          }
+          return params;
+        },
+        {}
+      );
+
+      // evitando el bug de que el renglón sea un array y el procedimiento no lo acepte
+      if (Array.isArray(procedureParams.renglon)) {
+        procedureParams.renglon = procedureParams.renglon[0];
+      }
 
       await executeProcedure(procedureName, procedureParams, schema);
 
