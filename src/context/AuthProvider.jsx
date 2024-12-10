@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkSession().then((resp) => {
       setAuth({user: resp?.user})
-      setLoading(false)
+      //setLoading(false)
     }).catch((resp) => {
 
     })
