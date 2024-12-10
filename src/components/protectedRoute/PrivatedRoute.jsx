@@ -1,12 +1,10 @@
-import { useEffect, useCallback } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { checkSession } from "../../api";
-
+import { Loading } from "../Loading/Loading";
 const PrivateRoute = () => {
   const { auth, loading } = useAuth();
   if(loading){
-    return <div>Loading</div>;
+    return <Loading />
   }
 
   return auth?.user ? <Outlet /> : <Navigate to="/login" />;
