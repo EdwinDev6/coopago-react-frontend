@@ -3,7 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { Loading } from "../Loading/Loading";
 const PrivateRoute = () => {
   const { auth, loading } = useAuth();
-  if(loading){
+  if(loading && !auth?.user){
     return <Loading />
   }
 
