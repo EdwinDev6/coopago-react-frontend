@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const Loading = () => {
   const [seconds, setSeconds] = useState(0);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -15,11 +15,11 @@ export const Loading = () => {
   }, []);
 
   useEffect(() => {
-    if(seconds > 10){
-      navigate("/login")
+    if (seconds > 10) {
+      navigate("/login");
     }
-  }, [seconds])
-  
+  }, [seconds]);
+
   return (
     <section className="bg-white dark:bg-gray-900 min-h-screen min-w-full container flex items-center justify-center text-gray-800 dark:text-white">
       <div className=" items-center text-center justify-center align-middle px-6 py-12">
@@ -29,7 +29,7 @@ export const Loading = () => {
         <h1 className="mt-4 text-xl">Cargando</h1>
         {seconds > 4 ? (
           <span>
-            Si estás atascado haz clic{" "}
+            Si estás atascado haz clic
             <Link className="text-blue-600" to="/login">
               aquí
             </Link>

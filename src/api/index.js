@@ -28,7 +28,6 @@ export const checkSession = () => {
       })
       .catch((res) => {
         reject(res)
-        console.log(res)
       });
   });
 };
