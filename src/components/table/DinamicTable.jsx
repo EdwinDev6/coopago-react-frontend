@@ -5,12 +5,25 @@ import { FaSortAlphaDownAlt, FaSortAlphaUp } from "react-icons/fa";
 import TableToExcel from "./Excel";
 import TableToPDF from "./Pdf";
 import ColumnFilter from "./DinamicFilter";
+import Modal from "../TableModal";
 
-const TableComponent = ({ data, columns, search }) => {
+const TableComponent = ({
+  data,
+  columns,
+  search,
+  onUpdate,
+  programa,
+  tabla,
+  campos,
+  id,
+  procedure,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedColumns, setSelectedColumns] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const rowsPerPage = 50;
 
   useEffect(() => {
@@ -69,6 +82,25 @@ const TableComponent = ({ data, columns, search }) => {
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1);
+  };
+
+  const handleClick = (e, row) => {
+    if (window.innerWidth <= 768) {
+      setSelectedRow(row);
+      setIsModalOpen(true);
+    } else {
+      handleDoubleClick(row);
+    }
+  };
+
+  const handleDoubleClick = (row) => {
+    setSelectedRow(row);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedRow(null);
   };
 
   const handleColumnToggle = (column) => {
@@ -132,7 +164,7 @@ const TableComponent = ({ data, columns, search }) => {
 
       <div className="overflow-y-auto max-h-[410px] w-full custom-scrollbar relative">
         <table className="w-full text-xs text-left text-gray-700 border border-gray-300">
-          <thead className="bg-mainTableColor text-white sticky top-0 z-10">
+          <thead className="bg-mainTableColor text-white sticky top-0 z-9">
             <tr>
               {columns.map(
                 (col, index) =>
@@ -165,7 +197,8 @@ const TableComponent = ({ data, columns, search }) => {
               currentData.map((row, rowIndex) => (
                 <tr
                   key={rowIndex}
-                  className="odd:bg-zebraPrimary even:bg-zebraColor"
+                  onClick={(e) => handleClick(e, row)}
+                  className="odd:bg-zebraPrimary even:bg-zebraColor cursor-pointer hover:bg-hoverTable hover:text-white"
                 >
                   {columns.map(
                     (col, colIndex) =>
@@ -179,7 +212,9 @@ const TableComponent = ({ data, columns, search }) => {
                         >
                           <div className="flex items-center justify-between">
                             <span className="whitespace-nowrap">
-                              {row[col.accessor] || "N/A"}
+                              {Array.isArray(row[col.accessor])
+                                ? row[col.accessor][0] || "N/A"
+                                : row[col.accessor] || "N/A"}
                             </span>
                           </div>
                         </td>
@@ -239,6 +274,19 @@ const TableComponent = ({ data, columns, search }) => {
             </button>
           </div>
         </div>
+      )}
+      {isModalOpen && (
+        <Modal
+          row={selectedRow}
+          columns={columns}
+          onClose={closeModal}
+          onUpdate={onUpdate}
+          programa={programa}
+          tabla={tabla}
+          campos={campos}
+          id={id}
+          procedure={procedure}
+        />
       )}
     </div>
   );
