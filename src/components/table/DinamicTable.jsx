@@ -15,7 +15,8 @@ const TableComponent = ({
   programa,
   tabla,
   campos,
-  id,procedure,
+  id,
+  procedure,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -211,7 +212,9 @@ const TableComponent = ({
                         >
                           <div className="flex items-center justify-between">
                             <span className="whitespace-nowrap">
-                              {row[col.accessor] || "N/A"}
+                              {Array.isArray(row[col.accessor])
+                                ? row[col.accessor][0] || "N/A"
+                                : row[col.accessor] || "N/A"}
                             </span>
                           </div>
                         </td>

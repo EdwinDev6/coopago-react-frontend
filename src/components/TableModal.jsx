@@ -29,7 +29,6 @@ const Modal = ({
     try {
       const procedureName = `p_registrar_${procedure}`;
 
-
       const procedureParams = Object.entries(formData).reduce(
         (params, [key, value]) => {
           if (key) {
@@ -100,24 +99,29 @@ const Modal = ({
   return (
     <>
       {/* Modal principal */}
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40">
         <div className="bg-white p-4 rounded shadow-md w-96">
           <h2 className="text-lg font-semibold">Editar o Eliminar</h2>
           <div className="mt-4">
-            {Object.entries(formData).map(([key, value]) => (
-              <div key={key} className="mb-2">
-                <label className="block text-sm font-medium">
-                  {getColumnHeader(key)}
-                </label>
-                <input
-                  type="text"
-                  value={value}
-                  onChange={(e) => handleChange(key, e.target.value)}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-            ))}
+            {columns
+              .filter((column) => column.Header !== "ID")
+              .map((column) => (
+                <div key={column.accessor} className="mb-2">
+                  <label className="block text-sm font-medium">
+                    {column.Header}
+                  </label>
+                  <input
+                    type="text"
+                    value={formData[column.accessor]}
+                    onChange={(e) =>
+                      handleChange(column.accessor, e.target.value)
+                    }
+                    className="w-full p-2 border rounded"
+                  />
+                </div>
+              ))}
           </div>
+
           <div className="flex justify-end gap-2 mt-4">
             <button
               onClick={() => setIsConfirmationOpen(true)}
@@ -140,7 +144,7 @@ const Modal = ({
 
       {/* Modal de confirmación */}
       {isConfirmationOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-4 rounded shadow-md w-80">
             <h3 className="text-lg font-semibold text-center">
               ¿Estás seguro de que quieres eliminar este registro?

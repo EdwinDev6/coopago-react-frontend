@@ -61,7 +61,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
     <div
       ref={sidebarRef}
       className={classNames(
-        "bg-neutral-900 w-60 p-3 flex flex-col absolute top-0 left-0 h-full transition-transform transform z-50",
+        "bg-neutral-900 w-60 p-3 flex flex-col absolute top-0 left-0 h-full transition-transform transform z-30",
         {
           "translate-x-0": isOpen,
           "-translate-x-full": !isOpen,
