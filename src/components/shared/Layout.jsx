@@ -24,7 +24,7 @@ export default function Layout() {
       />
       <div className="flex-1 flex flex-col min-h-screen w-full">
         <Header toggleSidebar={toggleSidebar} />
-        <div className="px-4 py-2 overflow-y-auto ">
+        <div className=" overflow-y-auto ">
           <Outlet />
         </div>
       </div>

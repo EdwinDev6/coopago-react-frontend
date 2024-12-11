@@ -72,7 +72,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
       <Link to={"/"}>
         <div className="flex items-center gap-2 px-1 py-3 cursor-pointer hover:bg-neutral-700">
           <img src={logotipo} alt="Coopago" className="w-10 h-10" />
-          <span className="text-neutral-200 text-lg">CooPagos</span>
+          <span className="text-neutral-200 text-lg">CoopPagos</span>
         </div>
       </Link>
 
