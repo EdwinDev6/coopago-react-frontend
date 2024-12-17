@@ -61,7 +61,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
     <div
       ref={sidebarRef}
       className={classNames(
-        "bg-neutral-900 w-60 p-3 flex flex-col absolute top-0 left-0 h-full transition-transform transform z-50",
+        "bg-neutral-900 w-60 p-3 flex flex-col absolute top-0 left-0 h-full transition-transform transform z-30",
         {
           "translate-x-0": isOpen,
           "-translate-x-full": !isOpen,
@@ -72,7 +72,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
       <Link to={"/"}>
         <div className="flex items-center gap-2 px-1 py-3 cursor-pointer hover:bg-neutral-700">
           <img src={logotipo} alt="Coopago" className="w-10 h-10" />
-          <span className="text-neutral-200 text-lg">CooPagos</span>
+          <span className="text-neutral-200 text-lg">CoopPagos</span>
         </div>
       </Link>
 
@@ -93,6 +93,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           ]}
           isActive={activeDropdown === "Cuentas"}
           toggleDropdown={() => toggleDropdown("Cuentas")}
+          closeSidebar={closeSidebar}
         />
         <Dropdown
           label="Pagos"
@@ -104,14 +105,19 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           ]}
           isActive={activeDropdown === "Pagos"}
           toggleDropdown={() => toggleDropdown("Pagos")}
+          closeSidebar={closeSidebar}
         />
         <Dropdown
           label="Beneficiarios"
           icon={<FaUsers />}
           options={[
             {
-              label: "Consultar Beneficiarios",
+              label: "Registrar Beneficiarios",
               path: "/RegistrarBeneficiarios",
+            },
+            {
+              label: "Consultar Beneficiarios",
+              path: "/consultarBeneficiarios",
             },
             { label: "Beneficiarios Interno", path: "/beneficiario-interno" },
             {
@@ -121,6 +127,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           ]}
           isActive={activeDropdown === "Beneficiarios"}
           toggleDropdown={() => toggleDropdown("Beneficiarios")}
+          closeSidebar={closeSidebar}
         />
         <Dropdown
           label="Consultas"
@@ -131,6 +138,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           ]}
           isActive={activeDropdown === "Consultas"}
           toggleDropdown={() => toggleDropdown("Consultas")}
+          closeSidebar={closeSidebar}
         />
       </div>
 
